@@ -45,9 +45,9 @@ end
   # 9. Amos Lee - Keep It Loose, Keep It Tight
 
 def list(my_songs)
-  my_songs.each { |key, value|
-    puts "#{key}"
-  }
+  my_songs.each_with_index do |song, index|
+    puts "#{index+1}. #{song}"
+  end
 end
 
 #list(songs)
@@ -58,16 +58,17 @@ end
 # If the user's response is a valid song number or song name, the method should puts out: "Playing <song name>". Otherwise, it should puts out: "Invalid input, please try again".
 
 def play(my_songs)
-  puts "Please enter a song name:"
-  user_input = gets.chomp
-  if my_songs.has_key?(user_input)
-   puts "Playing #{user_input}"
-   system "open #{my_songs.key(user_input)}"
+  puts "Please enter a song name or number:"
+  input = gets.chomp()
+  
+  if (1..9).to_a.index(input.to_i) != nil
+    puts "Playing #{my_songs[input.to_i - 1]}"
+  elsif my_songs.index(input) != nil
+    puts "Playing #{input}"
   else
-   puts "Invalid input, please try again"
+    puts "Invalid input, please try again"
   end
 end
-
 
 def exit_jukebox()
   puts "Goodbye"
@@ -86,22 +87,25 @@ end
 # We need to keep our program running as long as the user's input is not "exit". Use a loop to continue asking the user for input until or unless their input is "exit". Use if or case statements to determine how your program will respond to a user's input. For example, if their input is "list", call the list method, if their input is "play", call the play method, if their input is "help", call the help method and if their input is "exit", call the exit_jukebox method and break out of your loop to stop the program.
   
 def run(my_songs)
- help
-  loop do
-    puts "Please enter a command:"
-    user_input = gets.downcase.chomp
-    case user_input
-    when "exit"
-      exit_jukebox
-      break
-    when "list"
+  help()
+  input = prompt()
+  
+  while input != "exit"
+    if input == "list"
       list(my_songs)
-    when "play"
+      input = prompt()
+    elsif input == "play"
       play(my_songs)
-    when "help"
-      help
+      input = prompt()
+    elsif input == "help"
+      help()
+      input = prompt()
     else
-      help
+      puts "Invalid command"
+      help()
+      input = prompt()
     end
   end
+  
+  exit_jukebox()
 end
