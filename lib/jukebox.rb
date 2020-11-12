@@ -37,7 +37,6 @@ def prompt()
 end
 
 def run(my_songs)
-  help()
   input = prompt()
   while input != "exit"
     if input == "list"
