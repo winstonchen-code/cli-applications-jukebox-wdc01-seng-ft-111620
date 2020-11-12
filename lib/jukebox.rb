@@ -30,3 +30,25 @@ end
 def exit_jukebox()
   puts "Goodbye"
 end
+
+def run(my_songs)
+  help()
+  input = prompt()
+  while input != "exit"
+    if input == "list"
+      list(my_songs)
+      input = prompt()
+    elsif input == "play"
+      play(my_songs)
+      input = prompt()
+    elsif input == "help"
+      help()
+      input = prompt()
+    else
+      puts "Invalid command"
+      help()
+      input = prompt()
+    end
+  end
+  exit_jukebox()
+end
