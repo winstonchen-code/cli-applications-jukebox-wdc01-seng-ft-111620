@@ -87,25 +87,22 @@ end
 # We need to keep our program running as long as the user's input is not "exit". Use a loop to continue asking the user for input until or unless their input is "exit". Use if or case statements to determine how your program will respond to a user's input. For example, if their input is "list", call the list method, if their input is "play", call the play method, if their input is "help", call the help method and if their input is "exit", call the exit_jukebox method and break out of your loop to stop the program.
   
 def run(my_songs)
-  help()
-  input = prompt()
-  
-  while input != "exit"
-    if input == "list"
+ help
+  loop do
+    puts "Please enter a command:"
+    user_input = gets.downcase.chomp
+    case user_input
+    when "exit"
+      exit_jukebox
+      break
+    when "list"
       list(my_songs)
-      input = prompt()
-    elsif input == "play"
+    when "play"
       play(my_songs)
-      input = prompt()
-    elsif input == "help"
-      help()
-      input = prompt()
+    when "help"
+      help
     else
-      puts "Invalid command"
-      help()
-      input = prompt()
+      help
     end
   end
-  
-  exit_jukebox()
 end
