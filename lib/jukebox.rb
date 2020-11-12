@@ -9,10 +9,13 @@ def help()
 end
 
 def list(my_songs)
-  my_songs.each_with_index do |song, index|
-    puts "#{index+1}. #{song}"
-  end
+  #Collect the keys of the my_songs hash and
+  #list the songs by name
+  my_songs.each { |key, value|
+    puts "#{key}"
+  }
 end
+
 
 def play(my_songs)
   puts "Please enter a song name or number:"
