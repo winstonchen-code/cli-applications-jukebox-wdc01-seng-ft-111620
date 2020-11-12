@@ -58,17 +58,16 @@ end
 # If the user's response is a valid song number or song name, the method should puts out: "Playing <song name>". Otherwise, it should puts out: "Invalid input, please try again".
 
 def play(my_songs)
-  puts "Please enter a song name or number:"
-  input = gets.chomp()
-  
-  if (1..9).to_a.index(input.to_i) != nil
-    puts "Playing #{my_songs[input.to_i - 1]}"
-  elsif my_songs.index(input) != nil
-    puts "Playing #{input}"
+  puts "Please enter a song name:"
+  user_input = gets.chomp
+  if my_songs.has_key?(user_input)
+   puts "Playing #{user_input}"
+   system "open #{my_songs.key(user_input)}"
   else
-    puts "Invalid input, please try again"
+   puts "Invalid input, please try again"
   end
 end
+
 
 def exit_jukebox()
   puts "Goodbye"
