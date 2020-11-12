@@ -45,9 +45,9 @@ end
   # 9. Amos Lee - Keep It Loose, Keep It Tight
 
 def list(my_songs)
-  my_songs.each_with_index do |song, index|
-    puts "#{index+1}. #{song}"
-  end
+  my_songs.each { |key, value|
+    puts "#{key}"
+  }
 end
 
 #list(songs)
